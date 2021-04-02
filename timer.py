@@ -26,12 +26,13 @@ class Timer(object):
     def jd_time(self):
         """
         从京东服务器获取时间毫秒
+        改为获取淘宝服务器时间（京东服务器时间不可用）
         :return:
         """
-        url = 'https://a.jd.com//ajax/queryServerData.html'
+        url = 'http://api.m.taobao.com/rest/api3.do?api=mtop.common.getTimestamp'
         ret = requests.get(url).text
         js = json.loads(ret)
-        return int(js["serverTime"])
+        return int(js["data"]["t"])
 
     def local_time(self):
         """

@@ -379,6 +379,7 @@ class JdSeckill(object):
         self.timers.start()
         while True:
             try:
+                logger.info(reserve_url)
                 self.session.get(url='https:' + reserve_url)
                 logger.info('预约成功，已获得抢购资格 / 您已成功预约过了，无需重复预约')
                 if global_config.getRaw('messenger', 'enable') == 'true':
@@ -453,7 +454,9 @@ class JdSeckill(object):
                 logger.info("抢购链接获取成功: %s", seckill_url)
                 return seckill_url
             else:
+                logger.info(url)
                 logger.info("抢购链接获取失败，稍后自动重试")
+                exit()
                 wait_some_time()
 
     def request_seckill_url(self):
